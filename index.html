@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Overlay Limited to Image</title>
+  <style>
+    body, html {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: black; /* 배경색 */
+    }
+
+    .image-container {
+      height: 100%;
+      position: relative;
+      display: inline-block; /* 이미지 크기에 맞게 컨테이너 조정 */
+      line-height: 0; /* 이미지 주변 여백 제거 */
+    }
+
+    .image-container img {
+      margin-top: calc(100% / 6 * 4); /* 브라우저 높이의 20%만큼 위쪽 마진 */
+      height: 60vh; /* 브라우저 높이 */
+      width: auto; /* 비례 너비 */
+      display: block;
+      animation: fadeIn 10s ease-in-out infinite alternate; /* 이미지 페이드 효과 */
+    }
+
+    .image-container::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 100, 255, 0.2); /* 파란색 투명 레이어 */
+      pointer-events: none; /* 클릭 방지 */
+    }
+
+    .title {
+      position: absolute;
+      top: 25%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      color: white;
+      text-align: center;
+      font-size: 3rem;
+       /*animation: pulse 1.5s infinite; /* 빛나는 효과 */
+    }
+
+    .click {
+      position: absolute;
+      top: 95%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      color: white;
+      text-align: center;
+      font-size: 1rem;
+      font-family: 'Arial', sans-serif;
+      animation: flicker 1s infinite alternate; /* 깜박이는 효과 */
+      animation: bounceScale 1.5s infinite;
+    }
+
+    /* 애니메이션 정의 */
+    @keyframes bounceScale {
+      0%, 100% {
+        transform: translate(-50%, -50%) scale(1);
+      }
+      50% {
+        transform: translate(-50%, -50%) scale(1.1);
+      }
+    }
+
+    @keyframes fadeIn {
+      0% {
+        opacity: 0.5;
+      }
+      100% {
+        opacity: 1;
+      }
+    }
+
+    @keyframes glow {
+      0% {
+        box-shadow: 0 0 10px rgba(0, 100, 255, 0.5);
+      }
+      100% {
+        box-shadow: 0 0 30px rgba(0, 100, 255, 0.8);
+      }
+    }
+
+    @keyframes pulse {
+      0% {
+        text-shadow: 0 0 1px #00ffff, 0 0 2px #00ffff, 0 0 3px #00ffff;
+      }
+      50% {
+        text-shadow: 0 0 2px #00ffff, 0 0 3px #00ffff, 0 0 4px #00ffff;
+      }
+      100% {
+        text-shadow: 0 0 1px #00ffff, 0 0 2px #00ffff, 0 0 3px #00ffff;
+      }
+    }
+
+    @keyframes flicker {
+      0% {
+        opacity: 0.5;
+      }
+      100% {
+        opacity: 1;
+      }
+    }
+  </style>
+  <script>
+    // 페이지 로드 후 클릭 이벤트 설정
+    window.onload = function() {
+      document.body.addEventListener('click', function() {
+        window.location.href = 'https://koi3125.com'; // 이동할 URL
+      });
+    };
+  </script>
+</head>
+<body>
+  <div class="image-container">
+    <div class="title">ALTAIR</div>
+    <img src="img.png" alt="Sample Image">
+    <div class="click">touch the screen to begin</div>
+  </div>
+</body>
+</html>
